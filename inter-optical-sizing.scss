@@ -1,0 +1,83 @@
+@use "sass:map";
+
+// Inter Optical Sizing
+// Opinionated `opsz` and `letter-spacing` settings for the Inter variable font.
+
+// Configuration Map
+// Structure: (<font-size>: (<font-weight>: (opsz: <value>, ls: <value>)))
+// - font-size: in pixels
+// - font-weight: standard font weight values (100-900)
+// - opsz: optical size value
+// - ls: letter-spacing value in em units
+$inter-optical-map: (
+  11: (400: (opsz: 11.5, ls: 0.01em),
+    500: (opsz: 11.6, ls: 0.005em),
+    600: (opsz: 11.7, ls: 0em),
+    700: (opsz: 11.8, ls: 0em)),
+  12: (400: (opsz: 12.0, ls: 0.01em),
+    500: (opsz: 12.1, ls: 0.005em),
+    600: (opsz: 12.2, ls: 0em),
+    700: (opsz: 12.3, ls: -0.005em)),
+  14: (400: (opsz: 13.8, ls: 0.005em),
+    500: (opsz: 13.9, ls: 0em),
+    600: (opsz: 14.0, ls: 0em),
+    700: (opsz: 14.1, ls: -0.01em)),
+  16: (400: (opsz: 15.8, ls: 0em),
+    500: (opsz: 15.9, ls: 0em),
+    600: (opsz: 16.0, ls: -0.005em),
+    700: (opsz: 16.1, ls: -0.01em)),
+  20: (400: (opsz: 19.5, ls: -0.01em),
+    500: (opsz: 19.6, ls: -0.015em),
+    600: (opsz: 19.7, ls: -0.02em),
+    700: (opsz: 19.8, ls: -0.025em)),
+  24: (400: (opsz: 23.5, ls: -0.015em),
+    500: (opsz: 23.6, ls: -0.02em),
+    600: (opsz: 23.7, ls: -0.025em),
+    700: (opsz: 23.8, ls: -0.03em))) !default;
+
+// Mixin for generating CSS custom properties
+@mixin generate-custom-properties {
+  @each $size, $weights in $inter-optical-map {
+    @each $weight, $values in $weights {
+      --inter-opsz-#{$size}-#{$weight}: #{map.get($values, opsz)};
+      --inter-ls-#{$size}-#{$weight}: #{map.get($values, ls)};
+    }
+  }
+}
+
+// Mixin for applying optical sizing properties
+@mixin inter-optical($size, $weight) {
+  $values: map.get(map.get($inter-optical-map, $size), $weight
+  );
+
+@if $values {
+  font-size: #{$size}px;
+  font-weight: $weight;
+  font-variation-settings: "opsz"#{map.get($values, opsz)};
+
+  // Only apply letter-spacing if it's not 0 or 0em
+  $ls: map.get($values, ls);
+
+  @if $ls !=0 and $ls !=0em {
+    letter-spacing: $ls;
+  }
+}
+
+@else {
+  @warn "No values found for size: #{$size}px, weight: #{$weight}";
+}
+}
+
+// Generate root custom properties
+:root {
+  @include generate-custom-properties;
+}
+
+// Generate utility classes
+@each $size, $weights in $inter-optical-map {
+  @each $weight, $values in $weights {
+    .inter-opt-#{$size}-#{$weight} {
+      @include inter-optical($size, $weight);
+    }
+  }
+}
