@@ -10,6 +10,8 @@ across various font sizes and weights.
 
 The source SCSS file is in `src/`. The pre-compiled CSS files are in `dist/`.
 
+Works with [Inter version 4.1](https://github.com/rsms/inter/releases/tag/v4.1).
+
 ## Build from source
 
 To modify the SCSS or recompile the CSS, install [Sass](https://sass-lang.com/install/).
