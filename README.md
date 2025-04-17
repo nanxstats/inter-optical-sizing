@@ -1,5 +1,9 @@
 # inter-optical-sizing
 
+<a href="https://github.com/nanxstats/inter-optical-sizing">
+<img src="images/banner.png" alt="inter-optical-sizing">
+</a>
+
 Provides convenient `opsz` and `letter-spacing` settings for the Inter variable
 font to mimic the optical sizing characteristics of the San Francisco font
 across various font sizes and weights.
