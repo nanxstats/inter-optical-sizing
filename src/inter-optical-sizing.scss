@@ -5,16 +5,16 @@
 
 // Configuration Map
 // Structure: (<font-size>: (<font-weight>: (opsz: <value>, ls: <value>)))
-// - font-size: in pixels
-// - font-weight: standard font weight values (100-900)
+// - font-size: in px
+// - font-weight: standard font weight values
 // - opsz: optical size value
-// - ls: letter-spacing value in px units
+// - ls: letter-spacing value in px
 $inter-optical-map: (
-  12: (400: (opsz: 12.0, ls: 0.01px),
-    450: (opsz: 12.1, ls: 0.005px),
-    500: (opsz: 12.1, ls: 0.005px),
-    600: (opsz: 12.2, ls: 0px),
-    700: (opsz: 12.3, ls: -0.005px)),
+  12: (400: (opsz: 15.1, ls: 0),
+    450: (opsz: 14, ls: 0.01px),
+    500: (opsz: 14, ls: 0.04px),
+    600: (opsz: 14, ls: 0.11px),
+    700: (opsz: 14, ls: 0.18px)),
   13: (400: (opsz: 17.5, ls: 0),
     450: (opsz: 16.4, ls: 0),
     500: (opsz: 15.1, ls: 0),
